@@ -37,18 +37,22 @@ class etablissementApiController extends Controller
         $validatore = $request->validate([
             'nom' => 'required',
             'ville' => 'required',
-            'logo' => 'image|mimes:png,jpg,jpeg,webp'
+            'logo' => 'image|mimes:png,jpg,jpeg,webp,avif'
         ]);
 
         if ($request->hasFile('logo')) {
             $validatore['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
-
-        etablissement::create($validatore);
+        $etablissement = etablissement::create($validatore);
+        if (!$etablissement) {
+            return response()->json([
+                'message' => "Erreur lors de la création"
+            ], 500);
+        }
         return response()->json([
             'message' => true,
-        ]);
+        ], 201);
     }
 
     /**

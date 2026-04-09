@@ -53,11 +53,17 @@ class equipementApiController extends Controller
      */
     public function show(string $id)
     {
-        $equipement = equipement::findOrFail($id);
+        $equipement = equipement::where("code_inventaire", $id)->first();
+        if (!$equipement) {
+            return response()->json([
+                'status' => false,
+                'message' => "L'équipement avec le code $id n'existe pas."
+            ], 404);
+        }
         return response()->json([
-            'message' => true,
+            'status' => true,
             'data' => $equipement
-        ]);
+        ], 200);
     }
 
     /**
