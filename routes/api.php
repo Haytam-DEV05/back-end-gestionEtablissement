@@ -15,7 +15,6 @@ Route::get('/user', function (Request $request) {
 
 
 // ETABLISSEMENTS  =>
-Route::apiResource('etablissements', etablissementApiController::class);
 Route::get('/etablissement/{id}/equipements', [etablissementApiController::class, 'getEquipementsByEtablissement']);
 
 
@@ -24,11 +23,9 @@ Route::post('/etablissements/{id}/import', [etablissementApiController::class, '
 Route::get('/export-equipements/{id}', [etablissementApiController::class, 'exportEquipements']);
 
 // EQUIPEMENT API =>
-Route::apiResource('equipements', equipementApiController::class);
 Route::get('/equipements/custom/{id}', [equipementApiController::class, 'grabEquipements']);
 
 // LOCAUXES API =>
-Route::apiResource('locaux', locauxApiController::class);
 Route::get('/locaux/custom/{id}', [locauxApiController::class, 'getLocauxEtab']);
 
 
