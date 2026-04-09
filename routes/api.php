@@ -32,5 +32,9 @@ Route::apiResource('locaux', locauxApiController::class);
 Route::get('/locaux/custom/{id}', [locauxApiController::class, 'getLocauxEtab']);
 
 
-// HISTORIQUES =>
-Route::apiResource('historiques', historiqueApiController::class);
+Route::apiResources([
+    'etablissements' => etablissementApiController::class,
+    'equipements' => equipementApiController::class,
+    'locaux' => locauxApiController::class,
+    'historiques' => historiqueApiController::class,
+]);
